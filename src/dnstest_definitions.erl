@@ -1419,6 +1419,12 @@ pdns_definitions() ->
           }}
       }},
 
+    % 0	d.test.com.	IN	DNAME	3600	d2.test2.com.
+    % 0	www.d.test.com.	IN	CNAME	3600	www.d2.test2.com.
+    % 2	.	IN	OPT	32768
+    % Rcode: 0 (No Error), RD: 0, QR: 1, TC: 0, AA: 1, opcode: 0
+    % Reply to question for qname='www.d.test.com.', qtype=A
+
     {dname, {
         {question, {"www.d.test.com", ?DNS_TYPE_A}},
         {header, #dns_message{rc=?DNS_RCODE_NOERROR, rd=false, qr=true, tc=false, aa=true, oc=?DNS_OPCODE_QUERY}},
@@ -1428,6 +1434,22 @@ pdns_definitions() ->
                 {<<"www.d.test.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_CNAME, 3600, #dns_rrdata_cname{dname = <<"www.d2.test.com">>}}
               ]},
             {authority, []},
+            {additional, []}
+          }}
+      }},
+
+    % 1	test.com.	IN	SOA	3600	ns1.test.com. ahu.example.com. 2005092501 28800 7200 604800 86400
+    % Rcode: 0 (No Error), RD: 0, QR: 1, TC: 0, AA: 1, opcode: 0
+    % Reply to question for qname='d.test.com.', qtype=A
+
+    {dname_self, {
+        {question, {"d.test.com", ?DNS_TYPE_A}},
+        {header, #dns_message{rc=?DNS_RCODE_NOERROR, rd=false, qr=true, tc=false, aa=true, oc=?DNS_OPCODE_QUERY}},
+        {records, {
+            {answers, []},
+            {authority, [
+                {<<"test.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_SOA, 3600, #dns_rrdata_soa{mname = <<"ns1.test.com">>, rname = <<"ahu.example.com">>, serial=2005092501, refresh=28800, retry=7200, expire=604800, minimum = 86400}}          
+              ]},
             {additional, []}
           }}
       }},
