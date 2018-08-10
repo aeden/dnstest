@@ -1419,6 +1419,19 @@ pdns_definitions() ->
           }}
       }},
 
+    {dname, {
+        {question, {"www.d.test.com", ?DNS_TYPE_A}},
+        {header, #dns_message{rc=?DNS_RCODE_NOERROR, rd=false, qr=true, tc=false, aa=true, oc=?DNS_OPCODE_QUERY}},
+        {records, {
+            {answers, [
+                {<<"d.test.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_DNAME, 3600, #dns_rrdata_dname{dname = <<"d2.test2.com">>}},
+                {<<"www.d.test.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_CNAME, 3600, #dns_rrdata_cname{dname = <<"www.d2.test.com">>}}
+              ]},
+            {authority, []},
+            {additional, []}
+          }}
+      }},
+
     % 0	_double._tcp.dc.test.com.	IN	SRV	3600	0 100 389 server1.test.com.
     % 0	_double._tcp.dc.test.com.	IN	SRV	3600	1 100 389 server1.test.com.
     % 2	server1.test.com.	IN	A	3600	1.2.3.4
