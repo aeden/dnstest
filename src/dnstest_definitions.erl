@@ -1431,7 +1431,7 @@ pdns_definitions() ->
         {records, {
             {answers, [
                 {<<"d.test.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_DNAME, 3600, #dns_rrdata_dname{dname = <<"d2.test2.com">>}},
-                {<<"www.d.test.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_CNAME, 3600, #dns_rrdata_cname{dname = <<"www.d2.test.com">>}}
+                {<<"www.d.test.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_CNAME, 3600, #dns_rrdata_cname{dname = <<"www.d2.test2.com">>}}
               ]},
             {authority, []},
             {additional, []}
