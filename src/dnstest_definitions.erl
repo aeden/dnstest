@@ -14,6 +14,19 @@ definitions() ->
 
 erldns_definitions() ->
   [
+    % Proves that a DNAME hides records below
+    {dname_occlusion, {
+        {question, {"exists.d.test.com", ?DNS_TYPE_A}},
+        {header, #dns_message{rc=?DNS_RCODE_NOERROR, rd=false, qr=true, tc=false, aa=false, oc=?DNS_OPCODE_QUERY}},
+        {records, {
+            {answers, [
+                {<<"d.test.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_DNAME, 3600, #dns_rrdata_dname{dname = <<"d2.test2.com">>}},
+                {<<"www.d.test.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_CNAME, 3600, #dns_rrdata_cname{dname = <<"www.d2.test2.com">>}}
+              ]},
+            {authority, []},
+            {additional, []}
+          }}}},
+
     {ns_recursion_breakout, {
         {question, {"rns.example.com", ?DNS_TYPE_NS}},
         {header, #dns_message{rc=?DNS_RCODE_NOERROR, rd=false, qr=true, tc=false, aa=false, oc=?DNS_OPCODE_QUERY}},
