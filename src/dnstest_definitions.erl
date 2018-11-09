@@ -169,6 +169,20 @@ erldns_dnssec_definitions() ->
           }}
       }},
 
+    {dnssec_cdnskey, {
+        {question, {"example-dnssec.com", ?DNS_TYPE_CDNSKEY}},
+        {header, #dns_message{rc=?DNS_RCODE_NOERROR, rd=false, qr=true, tc=false, aa=true, oc=?DNS_OPCODE_QUERY}},
+        {options, [{dnssec, true}]},
+        {records, {
+            {answers, [
+                {<<"example-dnssec.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_CDNSKEY, 120, #dns_rrdata_cdnskey{flags = 257, protocol = 3, alg = ?DNS_ALG_RSASHA256, public_key = [19950023884812141327069378526778424537821842682002326291664262861042243956868777019282790007759923364993897500365841,322952729755131673734701209779560665954996175375376404453022988413912494776066645912342444415690645262643588770289772100982887500120087051315598339205817329813622689564541984611947665709742982003245799028497525519171546189867352183906279970741859214126016198414430241793], key_tag = 37440}},
+                {<<"example-dnssec.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_RRSIG, 120, #dns_rrdata_rrsig{type_covered = ?DNS_TYPE_CDNSKEY, alg = ?DNS_ALG_RSASHA256, labels = 2, original_ttl = 120, expiration = ?TEST_REPLACE, inception = ?TEST_REPLACE, key_tag = ?TEST_REPLACE, signers_name = <<"example-dnssec.com">>, signature = ?TEST_REPLACE}}
+              ]},
+            {authority, []},
+            {additional, []}
+          }}
+      }},
+
     {dnssec_cds0, {
         {question, {"example-dnssec0.com", ?DNS_TYPE_CDS}},
         {header, #dns_message{rc=?DNS_RCODE_NOERROR, rd=false, qr=true, tc=false, aa=true, oc=?DNS_OPCODE_QUERY}},
@@ -183,14 +197,14 @@ erldns_dnssec_definitions() ->
           }}
       }},
 
-    {dnssec_cdnskey, {
-        {question, {"example-dnssec.com", ?DNS_TYPE_CDNSKEY}},
+    {dnssec_cdnskey0, {
+        {question, {"example-dnssec0.com", ?DNS_TYPE_CDNSKEY}},
         {header, #dns_message{rc=?DNS_RCODE_NOERROR, rd=false, qr=true, tc=false, aa=true, oc=?DNS_OPCODE_QUERY}},
         {options, [{dnssec, true}]},
         {records, {
             {answers, [
-                {<<"example-dnssec.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_CDNSKEY, 120, #dns_rrdata_cdnskey{flags = 257, protocol = 3, alg = ?DNS_ALG_RSASHA256, public_key = [19950023884812141327069378526778424537821842682002326291664262861042243956868777019282790007759923364993897500365841,322952729755131673734701209779560665954996175375376404453022988413912494776066645912342444415690645262643588770289772100982887500120087051315598339205817329813622689564541984611947665709742982003245799028497525519171546189867352183906279970741859214126016198414430241793], key_tag = 37440}},
-                {<<"example-dnssec.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_RRSIG, 120, #dns_rrdata_rrsig{type_covered = ?DNS_TYPE_CDNSKEY, alg = ?DNS_ALG_RSASHA256, labels = 2, original_ttl = 120, expiration = ?TEST_REPLACE, inception = ?TEST_REPLACE, key_tag = ?TEST_REPLACE, signers_name = <<"example-dnssec.com">>, signature = ?TEST_REPLACE}}
+                {<<"example-dnssec0.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_CDNSKEY, 120, #dns_rrdata_cdnskey{flags = 0, protocol = 3, alg = 0, public_key = <<"0">>, key_tag = 13056}},
+                {<<"example-dnssec0.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_RRSIG, 120, #dns_rrdata_rrsig{type_covered = ?DNS_TYPE_CDNSKEY, alg = ?DNS_ALG_RSASHA256, labels = 2, original_ttl = 120, expiration = ?TEST_REPLACE, inception = ?TEST_REPLACE, key_tag = ?TEST_REPLACE, signers_name = <<"example-dnssec0.com">>, signature = ?TEST_REPLACE}}
               ]},
             {authority, []},
             {additional, []}
