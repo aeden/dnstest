@@ -169,6 +169,20 @@ erldns_dnssec_definitions() ->
           }}
       }},
 
+    {dnssec_cds0, {
+        {question, {"example-dnssec0.com", ?DNS_TYPE_CDS}},
+        {header, #dns_message{rc=?DNS_RCODE_NOERROR, rd=false, qr=true, tc=false, aa=true, oc=?DNS_OPCODE_QUERY}},
+        {options, [{dnssec, true}]},
+        {records, {
+            {answers, [
+                {<<"example-dnssec0.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_CDS, 120, #dns_rrdata_cds{keytag = 0, alg = 0, digest_type = 0, digest = <<0>>}},
+                {<<"example-dnssec0.com">>, ?DNS_CLASS_IN, ?DNS_TYPE_RRSIG, 120, #dns_rrdata_rrsig{type_covered = ?DNS_TYPE_CDS, alg = ?DNS_ALG_RSASHA256, labels = 2, original_ttl = 120, expiration = 1486899419, inception = 1479123419, key_tag = 49016, signers_name = <<"example-dnssec0.com">>, signature = <<121,253,185,154,79,241,210,73,94,193,5,163,161,183,128,222,212,110,195,207,201,98,109,12,32,252,14,231,253,61,232,78,223,172,24,16,113,132,110,51,151,98,95,89,135,21,96,197,224,82,166,202,220,186,240,176,20,111,18,145,90,4,214,207>>}}
+              ]},
+            {authority, []},
+            {additional, []}
+          }}
+      }},
+
     {dnssec_cdnskey, {
         {question, {"example-dnssec.com", ?DNS_TYPE_CDNSKEY}},
         {header, #dns_message{rc=?DNS_RCODE_NOERROR, rd=false, qr=true, tc=false, aa=true, oc=?DNS_OPCODE_QUERY}},
